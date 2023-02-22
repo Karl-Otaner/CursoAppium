@@ -13,10 +13,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class SwitchCheckBox {
+public class DesafioCadastro {
 
     @Test
-    public void deveInteragirSwitchCheckBox() throws MalformedURLException {
+    public void deveFazerUmCadastro() throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "Android");
         desiredCapabilities.setCapability("deviceName", "Nexus5-teste");
@@ -29,23 +29,44 @@ public class SwitchCheckBox {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Selecionar formulario
-        driver.findElement(By.xpath("//*[@text='Formulário']")).click();
+        driver.findElement(By.xpath("//android.widget.TextView[@Text='Formulário']")).click();
 
-        //Verificar status dos elementos
-        MobileElement check = driver.findElement(By.className("android.widget.CheckBox"));
+        //Preencher campos
+        //Campo nome
+        MobileElement campoNome = driver.findElement(MobileBy.AccessibilityId("nome"));
+        campoNome.sendKeys("Carlos");
+
+        //Abrir ComboBox
+        driver.findElement(MobileBy.AccessibilityId("console")).click();
+
+        //Escolher opção ComboBox
+        driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='PS4']")).click();
+
+        //Verificar CheckBox e Switch
+        MobileElement check = driver.findElement(MobileBy.AccessibilityId("check"));
         MobileElement switc = driver.findElement(MobileBy.AccessibilityId("switch"));
         Assert.assertTrue(check.getAttribute("checked").equals("false"));
         Assert.assertTrue(switc.getAttribute("checked").equals("true"));
 
-
-        //Clicar nos elementos
+        //Marca CheckBox e Switch
         check.click();
         switc.click();
 
 
+        //Salvar
+        driver.findElement(By.className("SALVAR")).click();
+
+
+
+
+
+
+        //Salvar Formulario
+
         //Verificar estados alterados
-        Assert.assertFalse(check.getAttribute("checked").equals("false"));
-        Assert.assertFalse(switc.getAttribute("checked").equals("true"));
+
+
+        //Validar campos
 
         driver.quit();
 
