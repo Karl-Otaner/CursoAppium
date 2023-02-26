@@ -70,13 +70,9 @@ public class FormularioTeste {
         //Selecionar opção desejada
         driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='Nintendo Switch']")).click();
 
-
         //Verificar opção selecionada
         String text = driver.findElement(By.xpath("//android.widget.Spinner/android.widget.TextView")).getText();
         Assert.assertEquals("Nintendo Switch", text);
-
-
-
 
         driver.quit();
 

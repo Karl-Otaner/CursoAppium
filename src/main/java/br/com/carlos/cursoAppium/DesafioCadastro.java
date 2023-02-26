@@ -29,12 +29,15 @@ public class DesafioCadastro {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Selecionar formulario
-        driver.findElement(By.xpath("//android.widget.TextView[@Text='Formulário']")).click();
+        driver.findElement(By.xpath("//android.widget.TextView[@text='Formulário']")).click();
 
         //Preencher campos
         //Campo nome
         MobileElement campoNome = driver.findElement(MobileBy.AccessibilityId("nome"));
         campoNome.sendKeys("Carlos");
+
+
+
 
         //Abrir ComboBox
         driver.findElement(MobileBy.AccessibilityId("console")).click();
@@ -52,23 +55,49 @@ public class DesafioCadastro {
         check.click();
         switc.click();
 
-
-        //Salvar
-        driver.findElement(By.className("SALVAR")).click();
-
-
-
+        //Verificar CheckBox e Switch - Resolução da aula
+        //driver.findElement(By.className("android.widget.EditText")).sendKeys("Carlos");
+        //driver.findElement(By.className("android.widget.CheckBox")).click();
+        //driver.findElement(By.className("android.widget.Switch")).click();
+        //driver.findElement(By.className("android.widget.Spinner")).click();
+        //driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='PS4']")).click();
 
 
 
         //Salvar Formulario
+        //driver.findElement(By.className("SALVAR")).clic;k(); - erro
+        driver.findElement(By.xpath("//*[@text='SALVAR']")).click();
+
 
         //Verificar estados alterados
+        // String nome = campoNome.getText();
+        //Assert.assertEquals("Carlos", campoNome);
+
+        //String ps4 = driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='PS4']")).getText();
+        //Assert.assertEquals("PS4", ps4);
+
+        //String switOff = driver.findElement(By.className("Switch: Off")).getText();
+        // String checkMarcado = driver.findElement(By.className("Checkbox: Marcado")).getText();
+
+        // Assert.assertEquals("Switch: Off", switOff);
+        // Assert.assertEquals("Switch: Off", checkMarcado)
 
 
-        //Validar campos
+        //Resolução: Verificações
+        MobileElement nome = driver.findElement(By.xpath("//android.widget.TextView[@text='Nome: Carlos']"));
+        Assert.assertEquals("Nome: Carlos", nome.getText());
 
-        driver.quit();
+        MobileElement combo = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Console:')]"));
+        Assert.assertEquals("Console: ps4", combo.getText());
+
+        MobileElement swit = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Switch:')]"));
+        Assert.assertTrue(swit.getText().endsWith("Off"));
+
+        MobileElement checki = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]"));
+        Assert.assertTrue(checki.getText().endsWith("Marcado"));
+
+
+        //driver.quit();
 
     }
 }
