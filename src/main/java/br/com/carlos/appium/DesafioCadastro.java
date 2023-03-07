@@ -1,4 +1,4 @@
-package br.com.carlos.cursoAppium;
+package br.com.carlos.appium;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -93,8 +93,8 @@ public class DesafioCadastro {
         MobileElement swit = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Switch:')]"));
         Assert.assertTrue(swit.getText().endsWith("Off"));
 
-        MobileElement checki = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]"));
-        Assert.assertTrue(checki.getText().endsWith("Marcado"));
+        MobileElement checkid = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]"));
+        Assert.assertTrue(checkid.getText().endsWith("Marcado"));
 
 
         //driver.quit();

@@ -1,4 +1,4 @@
-package br.com.carlos.cursoAppium;
+package br.com.carlos.appium;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;

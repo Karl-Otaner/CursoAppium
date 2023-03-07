@@ -1,4 +1,4 @@
-package br.com.carlos.cursoAppium;
+package br.com.carlos.appium;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
