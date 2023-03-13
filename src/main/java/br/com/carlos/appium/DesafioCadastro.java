@@ -36,9 +36,6 @@ public class DesafioCadastro {
         MobileElement campoNome = driver.findElement(MobileBy.AccessibilityId("nome"));
         campoNome.sendKeys("Carlos");
 
-
-
-
         //Abrir ComboBox
         driver.findElement(MobileBy.AccessibilityId("console")).click();
 
