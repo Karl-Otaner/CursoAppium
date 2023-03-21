@@ -1,11 +1,11 @@
-package br.com.carlos.appium;
+package br.com.carlos.appium.teste;
 
 
 import br.com.carlos.appium.core.DSL;
 import br.com.carlos.appium.core.DriverFactory;
+import br.com.carlos.appium.page.FormularioPage;
+import br.com.carlos.appium.page.MenuPage;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,14 +18,14 @@ import static org.junit.Assert.assertEquals;
 
 public class FormularioTeste {
 
-    private AndroidDriver<MobileElement> driver;
     private DSL dsl = new DSL();
+    private MenuPage menu = new MenuPage();
+    private FormularioPage formulario = new FormularioPage();
 
 
     @Before
     public void  inicializarAppium() throws MalformedURLException {
-        driver = DriverFactory.getDriver();
-        dsl.clicarPorTexto("Formulário");
+        menu.acessarFormulario();
     }
 
     @After
@@ -37,8 +37,8 @@ public class FormularioTeste {
     @Test
     public void devePreencherCampoTexto() throws MalformedURLException {
         //Escrever nome
-        dsl.escrever(MobileBy.AccessibilityId("nome"), "Carlos");
-        assertEquals("Carlos", dsl.obterTexto(MobileBy.AccessibilityId("nome")));
+        formulario.escreverNome("Carlos");
+        assertEquals("Carlos", formulario.obterNome());
     }
 
     @Test

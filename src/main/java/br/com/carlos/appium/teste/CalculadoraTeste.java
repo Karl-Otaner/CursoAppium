@@ -1,4 +1,4 @@
-package br.com.carlos.appium;
+package br.com.carlos.appium.teste;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
