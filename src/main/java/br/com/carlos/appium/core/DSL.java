@@ -1,10 +1,11 @@
-package br.com.carlos.core;
+package br.com.carlos.appium.core;
 
 import org.openqa.selenium.By;
 
-import static br.com.carlos.core.DriverFactory.getDriver;
+import static br.com.carlos.appium.core.DriverFactory.getDriver;
 
 public class DSL {
+
 
     public void escrever(By by, String texto){
         getDriver().findElement(by).sendKeys(texto);
@@ -20,7 +21,6 @@ public class DSL {
 
     public void clicarPorTexto(String texto){
         clicar(By.xpath("//*[@text='"+texto+"']"));
-
     }
 
     public void selecionarCombo(By by, String valor){
@@ -30,7 +30,14 @@ public class DSL {
 
     public boolean isCheckMarcado(By by){
         return getDriver().findElement(by).getAttribute("checked").equals("true");
+
     }
+
+
+
+
+
+
 
 
 }

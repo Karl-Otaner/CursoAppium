@@ -1,8 +1,11 @@
 package br.com.carlos.appium;
 
-import br.com.carlos.core.DSL;
-import br.com.carlos.core.DriverFactory;
+
+import br.com.carlos.appium.core.DSL;
+import br.com.carlos.appium.core.DriverFactory;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,22 +18,24 @@ import static org.junit.Assert.assertEquals;
 
 public class FormularioTeste {
 
+    private AndroidDriver<MobileElement> driver;
     private DSL dsl = new DSL();
+
 
     @Before
     public void  inicializarAppium() throws MalformedURLException {
+        driver = DriverFactory.getDriver();
         dsl.clicarPorTexto("Formulário");
-
     }
 
     @After
     public void tearDown(){
         DriverFactory.killDriver();
+
     }
 
     @Test
     public void devePreencherCampoTexto() throws MalformedURLException {
-
         //Escrever nome
         dsl.escrever(MobileBy.AccessibilityId("nome"), "Carlos");
         assertEquals("Carlos", dsl.obterTexto(MobileBy.AccessibilityId("nome")));
@@ -44,7 +49,7 @@ public class FormularioTeste {
 
         //Selecionar opção desejada
         String text = dsl.obterTexto(By.xpath("//android.widget.Spinner/android.widget.TextView"));
-        Assert.assertEquals("Nintendo Switch", text);
+        assertEquals("Nintendo Switch", text);
 
     }
 
