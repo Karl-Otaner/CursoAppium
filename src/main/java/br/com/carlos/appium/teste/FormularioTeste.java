@@ -5,7 +5,6 @@ import br.com.carlos.appium.core.DSL;
 import br.com.carlos.appium.core.DriverFactory;
 import br.com.carlos.appium.page.FormularioPage;
 import br.com.carlos.appium.page.MenuPage;
-import io.appium.java_client.MobileBy;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,11 +44,10 @@ public class FormularioTeste {
     public void deveInteragirCombo() throws MalformedURLException {
 
         //Clicar no combo
-        dsl.selecionarCombo(MobileBy.AccessibilityId("console"), "Nintendo Switch");
+        formulario.selecionarCombo("Nintendo Switch");
 
         //Selecionar opção desejada
-        String text = dsl.obterTexto(By.xpath("//android.widget.Spinner/android.widget.TextView"));
-        assertEquals("Nintendo Switch", text);
+        assertEquals("Nintendo Switch", formulario.obterValorCombo());
 
     }
 
@@ -57,16 +55,16 @@ public class FormularioTeste {
     public void deveInteragirSwitchCheckBox() throws MalformedURLException {
 
         //Verificar status dos elementos
-        Assert.assertFalse(dsl.isCheckMarcado(By.className("android.widget.CheckBox")));
-        Assert.assertTrue(dsl.isCheckMarcado(MobileBy.AccessibilityId("switch")));
+        Assert.assertFalse(formulario.isCheckMarcado());
+        Assert.assertTrue(formulario.isSwitchMarcado());
 
         //Clicar nos elementos
-        dsl.clicar(By.className("android.widget.CheckBox"));
-        dsl.clicar(MobileBy.AccessibilityId("switch"));
+        formulario.clicarCheck();
+        formulario.clicarSwitch();
 
         //Verificar estados alterados
-        Assert.assertTrue(dsl.isCheckMarcado(By.className("android.widget.CheckBox")));
-        Assert.assertFalse(dsl.isCheckMarcado(MobileBy.AccessibilityId("switch")));
+        Assert.assertTrue(formulario.isSwitchMarcado());
+        Assert.assertFalse(formulario.isSwitchMarcado());
     }
 
 
