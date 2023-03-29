@@ -1,7 +1,6 @@
 package br.com.carlos.appium.teste;
 
 
-import br.com.carlos.appium.core.DSL;
 import br.com.carlos.appium.core.DriverFactory;
 import br.com.carlos.appium.page.FormularioPage;
 import br.com.carlos.appium.page.MenuPage;
@@ -9,7 +8,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import java.net.MalformedURLException;
 
@@ -17,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 public class FormularioTeste {
 
-    private DSL dsl = new DSL();
     private MenuPage menu = new MenuPage();
     private FormularioPage formulario = new FormularioPage();
 
@@ -63,7 +60,7 @@ public class FormularioTeste {
         formulario.clicarSwitch();
 
         //Verificar estados alterados
-        Assert.assertTrue(formulario.isSwitchMarcado());
+        Assert.assertTrue(formulario.isCheckMarcado());
         Assert.assertFalse(formulario.isSwitchMarcado());
     }
 
@@ -72,19 +69,19 @@ public class FormularioTeste {
     public void deveRealizarCadastro() throws MalformedURLException {
 
         //Preencher campos
-        dsl.escrever(By.className("android.widget.EditText"), "Carlos");
-        dsl.clicar(By.className("android.widget.CheckBox"));
-        dsl.clicar(By.className("android.widget.Switch"));
-        dsl.selecionarCombo(By.className("android.widget.Spinner"), "Nintendo Switch");
+        formulario.escreverNome("Carlos");
+        formulario.clicarCheck();
+        formulario.clicarSwitch();
+        formulario.selecionarCombo("Nintendo Switch");
 
         //salvar
-        dsl.clicarPorTexto("SALVAR");
+        formulario.salvar();
 
         //Resolução: Verificações
-        assertEquals("Nome: Carlos", dsl.obterTexto(By.xpath("//android.widget.TextView[@text='Nome: Carlos']")));
-        assertEquals("Console: switch", dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Console:')]")));
-        Assert.assertTrue(dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Switch:')]")).endsWith("Off"));
-        Assert.assertTrue(dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]")).endsWith("Marcado"));
+        assertEquals("Nome: Carlos", formulario.obterNomeCadastrado());
+        assertEquals("Console: switch", formulario.obterConsole());
+        Assert.assertTrue(formulario.obterSwitch().endsWith("Off"));
+        Assert.assertTrue(formulario.obterCheck().endsWith("Marcado"));
 
     }
 }

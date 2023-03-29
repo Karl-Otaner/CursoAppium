@@ -32,6 +32,10 @@ public class FormularioPage {
         dsl.clicar(MobileBy.AccessibilityId("switch"));
     }
 
+    public void salvar(){
+        dsl.clicarPorTexto("SALVAR");
+
+    }
     public boolean isCheckMarcado() {
 
         return dsl.isCheckMarcado(By.className("android.widget.CheckBox"));
@@ -39,6 +43,21 @@ public class FormularioPage {
 
     public boolean isSwitchMarcado() {
         return dsl.isCheckMarcado(MobileBy.AccessibilityId("switch"));
+    }
+
+    public String obterNomeCadastrado(){
+
+        return dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Nome:')]"));
+    }
+    public String obterConsole(){
+        return dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Console:')]"));
+    }
+    public String obterCheck(){
+     return dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]"));
+
+    }
+    public String obterSwitch(){
+        return dsl.obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Switch:')]"));
     }
 
 }
